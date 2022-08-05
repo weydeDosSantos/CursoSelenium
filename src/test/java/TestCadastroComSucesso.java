@@ -1,6 +1,7 @@
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -12,13 +13,20 @@ import org.openqa.selenium.support.ui.Select;
 
 public class TestCadastroComSucesso {
 
-	@Test
-	public void devoRealizarCadastro() {
+	private WebDriver driver;
+
+	@Before
+	public void inicializa() {
 
 		System.setProperty("webdriver.chrome.driver", "./driver/chromedriver.exe");
-		WebDriver driver = new ChromeDriver();
+		driver = new ChromeDriver();
 		driver.manage().window().setSize(new Dimension(1200, 765));
 		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+
+	}
+
+	@Test
+	public void devoRealizarCadastro() {
 
 		driver.findElement(By.id("elementosForm:nome")).sendKeys("kazuza");
 		driver.findElement(By.id("elementosForm:sobrenome")).sendKeys("texeira");
@@ -41,10 +49,6 @@ public class TestCadastroComSucesso {
 
 	@Test
 	public void nomeObrigatorio() {
-		System.setProperty("webdriver.chrome.driver", "./driver/chromedriver.exe");
-		WebDriver driver = new ChromeDriver();
-		driver.manage().window().setSize(new Dimension(1200, 765));
-		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
 
 		driver.findElement(By.id("elementosForm:nome")).sendKeys("");
 		driver.findElement(By.id("elementosForm:cadastrar")).click();
@@ -57,10 +61,6 @@ public class TestCadastroComSucesso {
 
 	@Test
 	public void sobreNomeObrigatorio() {
-		System.setProperty("webdriver.chrome.driver", "./driver/chromedriver.exe");
-		WebDriver driver = new ChromeDriver();
-		driver.manage().window().setSize(new Dimension(1200, 765));
-		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
 
 		driver.findElement(By.id("elementosForm:nome")).sendKeys("kanastro");
 		driver.findElement(By.id("elementosForm:cadastrar")).click();
@@ -72,10 +72,6 @@ public class TestCadastroComSucesso {
 
 	@Test
 	public void sexoObrigatorio() {
-		System.setProperty("webdriver.chrome.driver", "./driver/chromedriver.exe");
-		WebDriver driver = new ChromeDriver();
-		driver.manage().window().setSize(new Dimension(1200, 765));
-		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
 
 		driver.findElement(By.id("elementosForm:nome")).sendKeys("kanastro");
 		driver.findElement(By.id("elementosForm:sobrenome")).sendKeys("deSouza");
@@ -88,10 +84,6 @@ public class TestCadastroComSucesso {
 
 	@Test
 	public void carneVegetariano() {
-		System.setProperty("webdriver.chrome.driver", "./driver/chromedriver.exe");
-		WebDriver driver = new ChromeDriver();
-		driver.manage().window().setSize(new Dimension(1200, 765));
-		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
 
 		driver.findElement(By.id("elementosForm:nome")).sendKeys("kanastro");
 		driver.findElement(By.id("elementosForm:sobrenome")).sendKeys("deSouza");
@@ -107,10 +99,6 @@ public class TestCadastroComSucesso {
 
 	@Test
 	public void vocePraticaEsporte() {
-		System.setProperty("webdriver.chrome.driver", "./driver/chromedriver.exe");
-		WebDriver driver = new ChromeDriver();
-		driver.manage().window().setSize(new Dimension(1200, 765));
-		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
 
 		driver.findElement(By.id("elementosForm:nome")).sendKeys("kanastro");
 		driver.findElement(By.id("elementosForm:sobrenome")).sendKeys("deSouza");
@@ -120,8 +108,7 @@ public class TestCadastroComSucesso {
 		Select combo = new Select(element);
 		combo.selectByVisibleText("Futebol");
 		combo.selectByVisibleText("O que eh esporte?");
-		
-		
+
 		driver.findElement(By.id("elementosForm:cadastrar")).click();
 		Alert alert = driver.switchTo().alert();
 		assertEquals("Voce faz esporte ou nao?", alert.getText());
